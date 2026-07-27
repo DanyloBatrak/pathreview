@@ -28,14 +28,14 @@ The `FaithfulnessChecker().check()` method builds context string by joining the 
 
 ## Week 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [link to commit documenting the reproduced issue]
+**Reproduction commit link:** https://github.com/ascherj/pathreview/commit/7e4a2dbf591dc0453c592645c05d158f53ba52e1
 
 **Reproduction summary:**
 
 Ran `pytest tests/unit/test_faithfulness_checker.py::TestFaithfulnessChecker::test_none_context_chunk_text -v` and confirmed that test fails with `TypeError` message: `sequence item 0: expected str instance, NoneType found` that was raised when `.check()` tries to join chunk's `None` "text" value into the context
 string.
 
-**PLAN.md link:** [link to PLAN.md in your fork]
+**PLAN.md link:** https://github.com/DanyloBatrak/pathreview/blob/fix/153-faithfulness-checker-none-text/PLAN.md
 
 **Walkthrough video (recommended):** [link to your Loom video, ≤2 min — recommended, not graded]
 
