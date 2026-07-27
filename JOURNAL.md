@@ -14,10 +14,10 @@ The `FaithfulnessChecker().check()` method builds context string by joining the 
 
 - **Understanding:** I can descrive this issue in such way: `check()` builds a context string from chunk using `chunk.get("text", "")`, but this only defaults when the key is "missing". If "text" is present and would be set to `None` then `.get()` returns `None`, and the later `" ".join(...)` call would crash the code with `TypeError` message.
 - **Affected area:** The issue is in `FaithfulnessChecker.check()`. The failing test `test_none_context_chunk_text` in `tests/unit/test_faithfulness_checker.py` confirms it.
-- **Definition of done:** Before the fix: passing a chunk like `{"text": None}` crashes with a `TypeError` message. After the fix: `check()` should treat that chunk's text as empty or missing one and still return a correct score feedback. 
+- **Definition of done:** Before the fix: passing a chunk like `{"text": None}` crashes with a `TypeError` message. After the fix: `check()` should treat that chunk's text as empty or missing one and still return a correct score feedback.
 - **Tier fit:** This is a Tier 1 issue because it requires one or two line fix that isolated to a single method, fully covered by an existing test and with no cross-module dependencies. This is my first contribution to a large codebase, which is why Tier 1 would be my starting point.
 - **Codebase readiness:** I've located `check()` through `tests/unit/test_faithfulness_checker.py` and the surrounding context-building logic, and read `test_none_context_chunk_text` from start to finish in the test file.
-- **Scope/time:** Based on the issue, I estimate 3-6 hours (Tier 1 estimate for Week 8-9) since it looks look like a 1-2 line fix with verifying the existing test passes. 
+- **Scope/time:** Based on the issue, I estimate 3-6 hours (Tier 1 estimate for Week 8-9) since it looks look like a 1-2 line fix with verifying the existing test passes.
 - **Blockers:** No open blockers or dependencies are noted in the issue.
 
 **Branch name:** fix/153-faithfulness-checker-none-text
@@ -25,3 +25,24 @@ The `FaithfulnessChecker().check()` method builds context string by joining the 
 **Setup confirmation:** [x] App runs locally at localhost:5173
 
 **Cohort ledger:** [x] Issue added to cohort ledger
+
+## Week 8 — Reproduction & solution planning
+
+**Reproduction commit link:** [link to commit documenting the reproduced issue]
+
+**Reproduction summary:**
+
+Ran `pytest tests/unit/test_faithfulness_checker.py::TestFaithfulnessChecker::test_none_context_chunk_text -v` and confirmed that test fails with `TypeError` message: `sequence item 0: expected str instance, NoneType found` that was raised when `.check()` tries to join chunk's `None` "text" value into the context
+string.
+
+**PLAN.md link:** [link to PLAN.md in your fork]
+
+**Walkthrough video (recommended):** [link to your Loom video, ≤2 min — recommended, not graded]
+
+**Blockers or open questions:**
+
+Uncertain for the one instruction:
+
+`Request peer or mentor feedback on a draft PR` :
+
+Where do I get PR link and how do I need to contact to instructor. Do I need to choose own instructor or I need to choose certain instructor
