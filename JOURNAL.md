@@ -46,3 +46,21 @@ Uncertain for the one instruction:
 `Request peer or mentor feedback on a draft PR` :
 
 Where do I get PR link and how do I need to contact to instructor. Do I need to choose own instructor or I need to choose certain instructor
+
+## Week 9 — Solution building & PR submission
+
+### Check-in 2 (end of week)
+
+**PR link:** [link to your submitted pull request]
+
+**Branch:** [the branch name you worked on, e.g. `fix/123-short-description`]
+
+**What you built:**
+[1–3 sentences summarizing what your fix does and how it works]
+
+**Tests added or updated:**
+[Which test files did you touch? What do they cover?]
+
+**Self-review confirmation:** [ ] make check passes [ ] make test-unit passes
+
+**Draft PR feedback received from:** [name or Slack handle, or "none"]
