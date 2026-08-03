@@ -51,16 +51,19 @@ Where do I get PR link and how do I need to contact to instructor. Do I need to 
 
 ### Check-in 2 (end of week)
 
-**PR link:** [link to your submitted pull request]
+**PR link:** https://github.com/ascherj/pathreview/pull/666#issue-5046789813
 
-**Branch:** [the branch name you worked on, e.g. `fix/123-short-description`]
+**Branch:** `fix/153-faithfulness-checker-none-text`
 
 **What you built:**
-[1–3 sentences summarizing what your fix does and how it works]
+
+Fixed a bug in `FaithfulnessChecker.check()` where context chunks with a `None` value for `"text"` caused a `TypeError` during string concatenation, since `.get("text", "")` only uses the default value when the "text" key is missing, but not when key exists and its value equals to `None`. Changed the pattern to `.get("text") or ""` so missing, `None`, and empty text are all treated consistently as empty strings.
 
 **Tests added or updated:**
-[Which test files did you touch? What do they cover?]
 
-**Self-review confirmation:** [ ] make check passes [ ] make test-unit passes
+Verified `test_none_context_chunk_text` in `tests/unit/test_faithfulness_checker.py` now passes, covering context chunks with `{"text": None}.`
 
-**Draft PR feedback received from:** [name or Slack handle, or "none"]
+**Self-review confirmation:** [x] make check passes [x] make test-unit passes
+(Note: Both checks pass according to the project's pre-existing failures policy. My changes introduced no new failures. `ruff check` on the modified file passes with no errors. Baseline `make test-unit` had 53 failures, after my fix - 52 failures, with the only change being `test_none_context_chunk_text` changing from failed to passed.)
+
+**Draft PR feedback received from:** none (yet to be reviewed)
