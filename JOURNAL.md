@@ -67,3 +67,41 @@ Verified `test_none_context_chunk_text` in `tests/unit/test_faithfulness_checker
 (Note: Both checks pass according to the project's pre-existing failures policy. My changes introduced no new failures. `ruff check` on the modified file passes with no errors. Baseline `make test-unit` had 53 failures, after my fix - 52 failures, with the only change being `test_none_context_chunk_text` changing from failed to passed.)
 
 **Draft PR feedback received from:** none (yet to be reviewed)
+
+## Week 10 — Iteration & reflection
+
+### Reviewer feedback
+
+**Feedback received:** [ ] Yes [X] No — still awaiting review
+
+**Summary of feedback:**
+
+No review came in
+
+**How you responded:**
+
+---
+
+### Reflection
+
+**What was harder than you expected?**
+
+Finding out the part where `.get("text", "")` doesn't work with the `None` case took much longer than expected to be for Tier 1 because the default-value argument in `chunk.get()` only activates when the key is missing, not when text set to `None` value. That distinction is easy to miss when scanning code, and it's the kind of bug that only shows with a specific data shape (e.g. a chunk that has a `"text"` key but no content), which is the reason why it slipped through originally.
+
+**What did you learn about working in a large codebase?**
+
+I learned that this codebase had 53 pre-existing failing tests and 181 pre-existing lint errors across the codebase which are been not related to my changes.When I first joined to this project, I thought that this codebase would have a clean baseline. However, I now understand that when I woek in shared codebase I would have to separate "failure that I caused" from "failure that were already there".
+
+This meant that by running `make test-unit` I need to check result before and after I did change rather than to just checking if my one new test passed.
+
+**How did AI tools help — and where did they fall short?**
+
+AI was most useful when I had hard time to with running tests and in explaining the difference between `chunk.get()` default value and the "or" fallbacks. However, it fall short when it came to telling me which of 53 failing tests were safe to ignore and what are related to my change. Because of that I had to read the test output and issue tracker by myself to find exact issue that related to my change.
+
+**What would you do differently if you started over?**
+
+If I started over, I would run the full baseline test before I touch any code rather than after I make the fix, so that I had a clear view of how many tests and lint errors were failling from the beginning. That way I could see the difference from the start instead of rebuilding it later.
+
+**What are you most proud of from this module?**
+
+I most pround of that, while working on Tier 1 problem I improved my project management skills. I noticed three other failling tests in same file that looked related to my fix. I investigated them and confirmed that they are not related to my fix. Instead of fixing them umpropted or ignoring them completely, I called them out in my PR as "pre-existing failing tests in `test_faithfulness_checker.py`." This taught me of importance of staying on track while still documenting other issues I discovered along the way.
